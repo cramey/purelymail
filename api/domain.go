@@ -50,8 +50,35 @@ func (api *API) ListDomains(shared bool) (*[]Domain, error) {
 	}
 
 	if ldr.Type != "success" {
-		return nil, fmt.Errorf("listRoutingRules: %s %s", ldr.Code, ldr.Message)
+		return nil, fmt.Errorf("listDomains: %s %s", ldr.Code, ldr.Message)
 	}
 
 	return &ldr.Result.Domains, nil
+}
+
+type GetOwnershipCodeResponse struct {
+	GenericResponse
+	Result struct {
+		Code string `json:"code"`
+	} `json:"result"`
+}
+
+func (api *API) DomainOwnershipCode() (string, error) {
+	ep := api.endpoint() + "getOwnershipCode"
+	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]bool{})
+	if err != nil {
+		return "", err
+	}
+
+	var gocr GetOwnershipCodeResponse
+	err = json.Unmarshal(resp, &gocr)
+	if err != nil {
+		return "", fmt.Errorf("json unmarshal error: %s", err)
+	}
+
+	if gocr.Type != "success" {
+		return "", fmt.Errorf("getOwnershipCode: %s %s", gocr.Code, gocr.Message)
+	}
+
+	return gocr.Result.Code, nil
 }

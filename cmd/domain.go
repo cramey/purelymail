@@ -17,6 +17,9 @@ func Domain(exec, cmd string, args []string) {
 	case "list", "ls":
 		DomainList(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
+	case "ownershipcode", "oc":
+		DomainOwnershipCode(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
+
 	case "--help", "help":
 		printDomainUsage(exec, cmd)
 
@@ -34,6 +37,8 @@ func printDomainUsage(exec, cmd string) {
 	fmt.Printf("See '%s %s <command> --help' for information", exec, cmd)
 	fmt.Println(" on a specific command")
 	fmt.Println("valid commands:")
-	fmt.Println("    list     list routing rules")
-	fmt.Println("    ls       shorthand for list")
+	fmt.Println("    list           list routing rules")
+	fmt.Println("    ls             shorthand for list")
+	fmt.Println("    ownershipcode  get domain ownership code")
+	fmt.Println("    oc             shorthand for ownershipcode")
 }
