@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 type ListRoutingRuleResponse struct {
@@ -17,7 +18,22 @@ type RoutingRule struct {
 	Domain    string   `json:"domainName"`
 	Prefix    bool     `json:"prefix"`
 	MatchUser string   `json:"matchUser"`
-	Addresses []string `json:"targetAddresses"`
+	Addrs     []string `json:"targetAddresses"`
+}
+
+func (rr RoutingRule) Summary() string {
+	var b strings.Builder
+	b.WriteString(fmt.Sprintf("%s@%s prefix=%s ",
+		rr.Domain, rr.MatchUser, yNo(rr.Prefix),
+	))
+	for i, addr := range rr.Addrs {
+		if i > 0 {
+			b.WriteString(", ")
+		}
+		b.WriteString(addr)
+	}
+
+	return b.String()
 }
 
 func (api *API) ListRoutingRules() (*[]RoutingRule, error) {
@@ -42,7 +58,7 @@ func (api *API) ListRoutingRules() (*[]RoutingRule, error) {
 
 func (api *API) CreateRoutingRule(domain, user string, prefix bool, addresses []string) error {
 	rr := RoutingRule{
-		Domain: domain, MatchUser: user, Prefix: prefix, Addresses: addresses,
+		Domain: domain, MatchUser: user, Prefix: prefix, Addrs: addresses,
 	}
 	ep := api.endpoint() + "createRoutingRule"
 	resp, err := api.exec(ep, "POST", MIME_JSON, rr)

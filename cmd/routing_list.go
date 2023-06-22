@@ -20,18 +20,15 @@ func RoutingList(exec, cmd string, args []string) {
 		fmt.Println("Formatting output - format uses the go template format")
 		fmt.Println("Variables are enclosed with {{}} and are case sensitive")
 		fmt.Println("Available variables:")
-		fmt.Println("  .ID             routing rule's unique id")
-		fmt.Println("  .Domain         routing rule's domain")
-		fmt.Println("  .MatchUser      user matched by routing rule")
-		fmt.Println("  .Prefix         is user matched only starting with")
-		fmt.Println("  .Addresses      list of addresses to send to")
+		fmt.Println("  .ID         (number) routing rule's unique id")
+		fmt.Println("  .Summary    (string) summary of all fields below")
+		fmt.Println("  .Domain     (string) routing rule's domain")
+		fmt.Println("  .MatchUser  (string) user matched by routing rule")
+		fmt.Println("  .Prefix     (bool) is user matched only starting with")
+		fmt.Println("  .Addrs      (string array) list of addresses to send to")
 	}
 	cpath := flagset.String("config", "", "path to configuration")
-	format := flagset.String(
-		"format",
-		"{{.ID}} {{.MatchUser}}@{{.Domain}} {{if .Prefix}}(prefix) {{end}}{{range .Addresses}}{{.}}{{end}}",
-		"output format",
-	)
+	format := flagset.String("format", "{{.ID}} {{.Summary}}", "output format")
 	flagset.Parse(args)
 
 	tmpl, err := template.New(cmd).Parse(*format)

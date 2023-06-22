@@ -20,21 +20,21 @@ func DomainList(exec, cmd string, args []string) {
 		fmt.Println("Formatting output - format uses the go template format")
 		fmt.Println("Variables are enclosed with {{}} and are case sensitive")
 		fmt.Println("Available variables:")
-		fmt.Println("  .Name                   domain name")
-		fmt.Println("  .AccountReset           is account reset allowed")
-		fmt.Println("  .SymbolicSubaddressing  domain uses symbolic subaddressing")
-		fmt.Println("  .Shared                 is domain shared")
-		fmt.Println("  .DNSSummary             dns summary object")
-		fmt.Println("    .MX                   does DNS pass MX check")
-		fmt.Println("    .SPF                  does DNS pass SPF check")
-		fmt.Println("    .DKIM                 does DNS pass DKIM check")
-		fmt.Println("    .DMARC                does DNS pass DMARC check")
+		fmt.Println("  .Name       (string) domain name")
+		fmt.Println("  .Summary    (string) summary of all attributes below")
+		fmt.Println("  .Reset      (bool) is account reset allowed")
+		fmt.Println("  .SubAddr    (bool) does domain use subaddressing")
+		fmt.Println("  .Shared     (bool) is domain shared")
+		fmt.Println("  .DNS.MX     (bool) does DNS pass MX check")
+		fmt.Println("  .DNS.SPF    (bool) does DNS pass SPF check")
+		fmt.Println("  .DNS.DKIM   (bool) does DNS pass DKIM check")
+		fmt.Println("  .DNS.DMARC  (bool) does DNS pass DMARC check")
 	}
 	cpath := flagset.String("config", "", "path to configuration")
 	shared := flagset.Bool("shared", false, "show shared domains")
 	format := flagset.String(
 		"format",
-		"{{.Name}} {{if .Shared}}[shared]{{end}}",
+		"{{.Name}} {{.Summary}}",
 		"output format",
 	)
 	flagset.Parse(args)

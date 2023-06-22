@@ -13,16 +13,25 @@ type ListDomainResponse struct {
 }
 
 type Domain struct {
-	Name                  string `json:"name"`
-	AccountReset          bool   `json:"allowAccountReset"`
-	SymbolicSubaddressing bool   `json:"symbolicSubaddressing"`
-	Shared                bool   `json:"isShared"`
-	DNSSummary            struct {
+	Name    string `json:"name"`
+	Reset   bool   `json:"allowAccountReset"`
+	SubAddr bool   `json:"symbolicSubaddressing"`
+	Shared  bool   `json:"isShared"`
+	DNS     struct {
 		MX    bool `json:"passesMx"`
 		SPF   bool `json:"passesSpf"`
 		DKIM  bool `json:"passesDkim"`
 		DMARC bool `json:"passesDmarc"`
 	} `json:"dnsSummary"`
+}
+
+func (dom Domain) Summary() string {
+	return fmt.Sprintf(
+		"Shared=%s Reset=%s SubAddr=%s MX=%s SPF=%s DKIM=%s DMARC=%s",
+		yNo(dom.Shared), yNo(dom.Reset), yNo(dom.SubAddr),
+		yNo(dom.DNS.MX), yNo(dom.DNS.SPF),
+		yNo(dom.DNS.DKIM), yNo(dom.DNS.DMARC),
+	)
 }
 
 func (api *API) ListDomains(shared bool) (*[]Domain, error) {
