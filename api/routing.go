@@ -7,11 +7,9 @@ import (
 
 type ListRoutingRuleResponse struct {
 	GenericResponse
-	Result ListRoutingRuleResult `json:"result"`
-}
-
-type ListRoutingRuleResult struct {
-	Rules []RoutingRule `json:"rules"`
+	Result struct {
+		Rules []RoutingRule `json:"rules"`
+	} `json:"result"`
 }
 
 type RoutingRule struct {
