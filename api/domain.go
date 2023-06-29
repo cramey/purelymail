@@ -37,7 +37,7 @@ func (dom Domain) Summary() string {
 func (api *API) ListDomains(shared bool) (*[]Domain, error) {
 	ep := api.endpoint() + "listDomains"
 	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]bool{
-		"includeShared": false,
+		"includeShared": shared,
 	})
 	if err != nil {
 		return nil, err
@@ -81,4 +81,70 @@ func (api *API) DomainOwnershipCode() (string, error) {
 	}
 
 	return gocr.Result.Code, nil
+}
+
+func (api *API) AddDomain(domain string) error {
+	ep := api.endpoint() + "addDomain"
+	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]string{
+		"domainName": domain,
+	})
+	if err != nil {
+		return err
+	}
+
+	var gr GenericResponse
+	err = json.Unmarshal(resp, &gr)
+	if err != nil {
+		return fmt.Errorf("json unmarshal error: %s", err)
+	}
+
+	if gr.Type != "success" {
+		return fmt.Errorf("addDomain: %s %s", gr.Code, gr.Message)
+	}
+	return nil
+}
+
+func (api *API) DeleteDomain(domain string) error {
+	ep := api.endpoint() + "deleteDomain"
+	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]string{
+		"name": domain,
+	})
+	if err != nil {
+		return err
+	}
+
+	var gr GenericResponse
+	err = json.Unmarshal(resp, &gr)
+	if err != nil {
+		return fmt.Errorf("json unmarshal error: %s", err)
+	}
+
+	if gr.Type != "success" {
+		return fmt.Errorf("deleteDomain: %s %s", gr.Code, gr.Message)
+	}
+	return nil
+}
+
+func (api *API) UpdateDomain(domain string, reset, subaddr, dns bool) error {
+	ep := api.endpoint() + "updateDomainSettings"
+	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]interface{}{
+		"name":                  domain,
+		"allowAccountReset":     reset,
+		"symbolicSubaddressing": subaddr,
+		"recheckDns":            dns,
+	})
+	if err != nil {
+		return err
+	}
+
+	var gr GenericResponse
+	err = json.Unmarshal(resp, &gr)
+	if err != nil {
+		return fmt.Errorf("json unmarshal error: %s", err)
+	}
+
+	if gr.Type != "success" {
+		return fmt.Errorf("updateDomainSettings: %s %s", gr.Code, gr.Message)
+	}
+	return nil
 }

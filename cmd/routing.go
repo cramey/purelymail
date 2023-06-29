@@ -20,7 +20,7 @@ func Routing(exec, cmd string, args []string) {
 	case "add", "a":
 		RoutingAdd(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
-	case "rm", "del":
+	case "delete", "del", "rm":
 		RoutingDelete(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "--help", "help":
@@ -42,8 +42,9 @@ func printMailboxUsage(exec, cmd string) {
 	fmt.Println("valid commands:")
 	fmt.Println("    add      add routing rule")
 	fmt.Println("    a        shorthand for add")
-	fmt.Println("    del      delete routing rule")
-	fmt.Println("    rm       shorthand for del")
+	fmt.Println("    delete   delete routing rule")
+	fmt.Println("    del      shorthand for delete")
+	fmt.Println("    rm       shorthand for delete")
 	fmt.Println("    list     list routing rules")
 	fmt.Println("    ls       shorthand for list")
 }
