@@ -18,13 +18,13 @@ func Domain(exec, cmd string, args []string) {
 		DomainList(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "add", "a":
-		AddDomain(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
+		DomainAdd(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "delete", "del", "rm":
-		DeleteDomain(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
+		DomainDelete(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "update", "up":
-		UpdateDomain(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
+		DomainUpdate(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "ownershipcode", "oc":
 		DomainOwnershipCode(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])

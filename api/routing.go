@@ -24,7 +24,7 @@ type RoutingRule struct {
 func (rr RoutingRule) Summary() string {
 	var b strings.Builder
 	b.WriteString(fmt.Sprintf("%s@%s prefix=%s ",
-		rr.Domain, rr.MatchUser, yNo(rr.Prefix),
+		rr.MatchUser, rr.Domain, yNo(rr.Prefix),
 	))
 	for i, addr := range rr.Addrs {
 		if i > 0 {
@@ -79,8 +79,8 @@ func (api *API) CreateRoutingRule(domain, user string, prefix bool, addresses []
 }
 
 func (api *API) DeleteRoutingRule(id int64) error {
-	req := map[string]int64{"routingRuleId": id}
 	ep := api.endpoint() + "deleteRoutingRule"
+	req := map[string]int64{"routingRuleId": id}
 	resp, err := api.exec(ep, "POST", MIME_JSON, req)
 	if err != nil {
 		return err

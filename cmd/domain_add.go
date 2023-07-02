@@ -9,7 +9,7 @@ import (
 	"purelymail/api"
 )
 
-func AddDomain(exec, cmd string, args []string) {
+func DomainAdd(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {

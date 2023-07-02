@@ -22,6 +22,9 @@ func main() {
 	case "domains", "domain", "d":
 		cmd.Domain(os.Args[0], cn, os.Args[2:])
 
+	case "users", "user", "u":
+		cmd.User(os.Args[0], cn, os.Args[2:])
+
 	case "--help", "help":
 		printDefaultUsage()
 
@@ -41,7 +44,9 @@ func printDefaultUsage() {
 	fmt.Println(" on a specific command")
 	fmt.Println("valid commands:")
 	fmt.Println("    domain       domain management")
-	fmt.Println("    d            shorthand for domain")
+	fmt.Println("    d            alias for domain")
 	fmt.Println("    routing      routing rules management")
-	fmt.Println("    r            shorthand for routing")
+	fmt.Println("    r            alias for routing")
+	fmt.Println("    user         user management")
+	fmt.Println("    u            alias for user")
 }

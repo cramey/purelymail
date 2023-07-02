@@ -9,7 +9,7 @@ import (
 	"purelymail/api"
 )
 
-func DeleteDomain(exec, cmd string, args []string) {
+func DomainDelete(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
