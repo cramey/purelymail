@@ -13,8 +13,9 @@ func DomainUpdate(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
-		fmt.Printf("Usage: %s %s [args] <domain>\n",
-			exec, cmd)
+		fmt.Printf("Usage: %s %s [args] <domain>\n\n", exec, cmd)
+		fmt.Printf("Updates settings on a domain managed by Purelymail.\n\n")
+		fmt.Printf("Arguments:\n")
 		flagset.PrintDefaults()
 	}
 	reset := flagset.Bool("reset", false, "allow account resetting")

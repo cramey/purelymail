@@ -12,8 +12,9 @@ func UserDelete(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
-		fmt.Printf("Usage: %s %s [args] <user@domain>\n",
-			exec, cmd)
+		fmt.Printf("Usage: %s %s [args] <user@domain>\n\n", exec, cmd)
+		fmt.Printf("Deletes a user in a specific domain.\n\n")
+		fmt.Printf("Arguments:\n")
 		flagset.PrintDefaults()
 	}
 	cpath := flagset.String("config", "", "path to configuration")

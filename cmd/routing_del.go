@@ -13,7 +13,9 @@ func RoutingDelete(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
-		fmt.Printf("Usage: %s %s [args] <id>\n", exec, cmd)
+		fmt.Printf("Usage: %s %s [args] <id>\n\n", exec, cmd)
+		fmt.Printf("Deletes an existing routing rule by ID.\n\n")
+		fmt.Printf("Arguments:\n")
 		flagset.PrintDefaults()
 	}
 	cpath := flagset.String("config", "", "path to configuration")

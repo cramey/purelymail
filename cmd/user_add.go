@@ -23,8 +23,9 @@ func UserAdd(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
-		fmt.Printf("Usage: %s %s [args] <user@domain>\n",
-			exec, cmd)
+		fmt.Printf("Usage: %s %s [args] <user@domain>\n\n", exec, cmd)
+		fmt.Printf("Adds a user account to an existing domain.\n\n")
+		fmt.Printf("Arguments:\n")
 		flagset.PrintDefaults()
 	}
 	reset := flagset.Bool("reset", false, "enable password resetting")

@@ -13,8 +13,10 @@ func RoutingAdd(exec, cmd string, args []string) {
 	flagset := flag.NewFlagSet(cmd, flag.ExitOnError)
 	flagset.SetOutput(os.Stdout)
 	flagset.Usage = func() {
-		fmt.Printf("Usage: %s %s [args] <user@domain> <to ...>\n",
-			exec, cmd)
+		fmt.Printf("Usage: %s %s [args] <user@domain> <to ...>\n\n", exec, cmd)
+		fmt.Printf("Adds an email routing rule. Used for aliases, catch-all ")
+		fmt.Printf("addresses, and prefix-matched addresses.\n\n")
+		fmt.Printf("Arguments:\n")
 		flagset.PrintDefaults()
 	}
 	prefix := flagset.Bool("prefix", false, "is added rule a prefix")
