@@ -43,10 +43,7 @@ func printDefaultUsage() {
 	fmt.Printf("See '%s <command> --help' for information", os.Args[0])
 	fmt.Println(" on a specific command")
 	fmt.Println("valid commands:")
-	fmt.Println("    domain       domain management")
-	fmt.Println("    d            alias for domain")
-	fmt.Println("    routing      routing rules management")
-	fmt.Println("    r            alias for routing")
-	fmt.Println("    user         user management")
-	fmt.Println("    u            alias for user")
+	fmt.Println("    domains      domain management (aliases: domain, d)")
+	fmt.Println("    routing      routing rules management (aliases: route, r)")
+	fmt.Println("    users        user management (aliases: user, u)")
 }

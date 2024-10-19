@@ -14,13 +14,13 @@ func Routing(exec, cmd string, args []string) {
 	}
 
 	switch subcmd := strings.ToLower(args[0]); subcmd {
-	case "list", "ls":
+	case "list", "ls", "l":
 		RoutingList(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "add", "a":
 		RoutingAdd(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
-	case "delete", "del", "rm":
+	case "delete", "del", "rm", "r":
 		RoutingDelete(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "--help", "help":
@@ -40,11 +40,7 @@ func printMailboxUsage(exec, cmd string) {
 	fmt.Printf("See '%s %s <command> --help' for information", exec, cmd)
 	fmt.Println(" on a specific command")
 	fmt.Println("valid commands:")
-	fmt.Println("    add      add routing rule")
-	fmt.Println("    a        shorthand for add")
-	fmt.Println("    delete   delete routing rule")
-	fmt.Println("    del      shorthand for delete")
-	fmt.Println("    rm       shorthand for delete")
-	fmt.Println("    list     list routing rules")
-	fmt.Println("    ls       shorthand for list")
+	fmt.Println("    add      add routing rule (aliases: a)")
+	fmt.Println("    delete   delete routing rule (aliases: del, rm, r)")
+	fmt.Println("    list     list routing rules (aliases: ls, l)")
 }

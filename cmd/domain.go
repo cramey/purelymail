@@ -14,19 +14,19 @@ func Domain(exec, cmd string, args []string) {
 	}
 
 	switch subcmd := strings.ToLower(args[0]); subcmd {
-	case "list", "ls":
+	case "list", "ls", "l":
 		DomainList(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "add", "a":
 		DomainAdd(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
-	case "delete", "del", "rm":
+	case "delete", "del", "rm", "r":
 		DomainDelete(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
-	case "update", "up":
+	case "update", "up", "u":
 		DomainUpdate(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
-	case "ownershipcode", "oc":
+	case "ownershipcode", "oc", "o":
 		DomainOwnershipCode(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
 	case "--help", "help":
@@ -46,15 +46,9 @@ func printDomainUsage(exec, cmd string) {
 	fmt.Printf("See '%s %s <command> --help' for information", exec, cmd)
 	fmt.Println(" on a specific command")
 	fmt.Println("valid commands:")
-	fmt.Println("    add            add domain")
-	fmt.Println("    a              shorthand for add")
-	fmt.Println("    delete         delete domain")
-	fmt.Println("    del            shorthand for delete")
-	fmt.Println("    list           list domains")
-	fmt.Println("    ls             shorthand for list")
-	fmt.Println("    ownershipcode  get domain ownership code")
-	fmt.Println("    oc             shorthand for ownershipcode")
-	fmt.Println("    rm             shorthand for delete")
-	fmt.Println("    update         update domain settings")
-	fmt.Println("    up             shorthand for update")
+	fmt.Println("    add            add domain (aliases: a)")
+	fmt.Println("    delete         delete domain (aliases: del, rm, r)")
+	fmt.Println("    list           list domains (aliases: ls, l)")
+	fmt.Println("    ownershipcode  get domain ownership code (aliases: oc, o)")
+	fmt.Println("    update         update domain settings (aliases: up, u)")
 }
