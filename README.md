@@ -1,5 +1,6 @@
-## Purelymail Command Line API
-This project, much like Purelymail, is a work in progress.
+## Purelymail Command Line Tool
+This tool uses the Purelymail API to allow you to control your Purelymail
+account. Currently it supports management of users, routing, and domains.
 
 ## Configuration
 Please see `purelymail.sample.yaml` for configuration examples. The
