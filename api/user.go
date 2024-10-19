@@ -5,6 +5,13 @@ import (
 	"fmt"
 )
 
+type ListUserResponse struct {
+	GenericResponse
+	Result struct {
+		Users []string `json:"users"`
+	} `json:"result"`
+}
+
 type UserConfig struct {
 	User                     string `json:"userName"`
 	Domain                   string `json:"domainName"`
@@ -56,4 +63,24 @@ func (api *API) DeleteUser(email string) error {
 	}
 
 	return nil
+}
+
+func (api *API) ListUsers() (*[]string, error) {
+	ep := api.endpoint() + "listUser"
+	resp, err := api.exec(ep, "POST", MIME_JSON, map[string]bool{})
+	if err != nil {
+		return nil, err
+	}
+
+	var lur ListUserResponse
+	err = json.Unmarshal(resp, &lur)
+	if err != nil {
+		return nil, fmt.Errorf("json unmarshal error: %s", err)
+	}
+
+	if lur.Type != "success" {
+		return nil, fmt.Errorf("listUser: %s %s", lur.Code, lur.Message)
+	}
+
+	return &lur.Result.Users, nil
 }

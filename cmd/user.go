@@ -20,6 +20,9 @@ func User(exec, cmd string, args []string) {
 	case "delete", "del", "rm":
 		UserDelete(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
 
+	case "list", "ls":
+		UserList(exec, fmt.Sprintf("%s %s", cmd, subcmd), args[1:])
+
 	case "--help", "help":
 		printUserUsage(exec, cmd)
 
@@ -42,5 +45,7 @@ func printUserUsage(exec, cmd string) {
 	fmt.Println("    create         create a new user")
 	fmt.Println("    delete         delete a user")
 	fmt.Println("    del            alias for delete")
+	fmt.Println("    list           list users")
+	fmt.Println("    ls             alias for list")
 	fmt.Println("    rm             alias for delete")
 }
